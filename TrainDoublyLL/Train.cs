@@ -5,7 +5,7 @@ using TrainDoublyLL.DoublyLinkedList;
 
 namespace TrainDoublyLL
 {
-    public class Train
+    public class Train : IEnumerable<Carriage>
     {
         public DoublyLinkedList<Carriage> train;
 
@@ -31,12 +31,20 @@ namespace TrainDoublyLL
             Console.WriteLine($"Вагон с кодом {carriage.Number} отцеплен от поезда.");
         }
 
-        public void GetAll()
+
+        public IEnumerator<Carriage> GetEnumerator()
         {
-            foreach (var c in train)
-            {
-                Console.WriteLine(train.GetEnumerator());
-            }
+            return train.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            return string.Join("", train);
         }
     }
 }
